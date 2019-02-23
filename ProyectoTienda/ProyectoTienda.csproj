@@ -296,6 +296,7 @@
     <Content Include="Views\Articulo\Edit.cshtml" />
     <Content Include="Views\Articulo\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Carrito\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
