@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProyectoTienda;
+using TiendaCarritoSession.Controllers;
 
 namespace ProyectoTienda.Controllers
 {
@@ -15,9 +16,35 @@ namespace ProyectoTienda.Controllers
         private TiendaEntities db = new TiendaEntities();
 
         // GET: Articulo
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.Articulos.ToList());
+        }
+
+        // Add: Articulo
+        public ActionResult Add(CarritoCompra cc, int id)
+        {
+            //Comprobamos si hay stock suficiente. 
+            int cantidadArticulos = 0;
+            foreach (Articulo art in cc)
+            {
+                if (art.Id == id) { cantidadArticulos++; }
+            }
+
+            Articulo articulo = db.Articulos.Find(id);
+            
+            if (cantidadArticulos >= articulo.stock)
+            {
+                TempData["notice_error"] = "Sobrepasas el stock, artículo no añadido";
+            }
+            else
+            {
+                cc.Add(db.Articulos.Find(id));
+                TempData["notice_success"] = "Añadido al carrito";
+            }
+           
+            return RedirectToAction("Index");
         }
 
         // GET: Articulo/Details/5

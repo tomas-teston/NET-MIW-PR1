@@ -183,6 +183,7 @@
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArticuloController.cs" />
+    <Compile Include="Controllers\CarritoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -204,6 +205,8 @@
       <DependentUpon>ModeloTienda.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Binders\CarritoCompraMB.cs" />
+    <Compile Include="Models\CarritoCompra.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Pedido.cs">
@@ -213,6 +216,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\alertify.core.css" />
+    <Content Include="Content\alertify.default.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -231,6 +236,7 @@
       <DependentUpon>ModeloTienda.edmx</DependentUpon>
       <LastGenOutput>ModeloTienda.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\alertify\alertify.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="ModeloTienda.edmx">
@@ -261,7 +267,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -290,6 +295,7 @@
     <Content Include="Views\Articulo\Details.cshtml" />
     <Content Include="Views\Articulo\Edit.cshtml" />
     <Content Include="Views\Articulo\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
