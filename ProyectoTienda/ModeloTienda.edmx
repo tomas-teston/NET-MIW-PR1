@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TiendaModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="TiendaModelStoreContainer">
+    <EntitySet Name="Articulos" EntityType="TiendaModel.Store.Articulos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Clientes" EntityType="TiendaModel.Store.Clientes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Pedidos" EntityType="TiendaModel.Store.Pedidos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PedidoArticulo" EntityType="TiendaModel.Store.PedidoArticulo" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_ClientePedido" Association="TiendaModel.Store.FK_ClientePedido">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Pedidos" EntitySet="Pedidos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PedidoArticulo_Articulos" Association="TiendaModel.Store.FK_PedidoArticulo_Articulos">
+      <End Role="Articulos" EntitySet="Articulos" />
+      <End Role="PedidoArticulo" EntitySet="PedidoArticulo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PedidoArticulo_Pedidos" Association="TiendaModel.Store.FK_PedidoArticulo_Pedidos">
+      <End Role="Pedidos" EntitySet="Pedidos" />
+      <End Role="PedidoArticulo" EntitySet="PedidoArticulo" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Articulos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="stock" Type="int" Nullable="false" />
+    <Property Name="precio" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="apellidos" Type="varchar" Nullable="true" MaxLength="150" />
+    <Property Name="direccion" Type="varchar" Nullable="true" MaxLength="350" />
+    <Property Name="user" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="password" Type="varchar" Nullable="true" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Pedidos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cantidad" Type="int" Nullable="false" />
+    <Property Name="fecha_registro" Type="datetime" Nullable="false" />
+    <Property Name="Cliente_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PedidoArticulo">
+    <Key>
+      <PropertyRef Name="Articulos_Id" />
+      <PropertyRef Name="Pedidos_Id" />
+    </Key>
+    <Property Name="Articulos_Id" Type="int" Nullable="false" />
+    <Property Name="Pedidos_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ClientePedido">
+    <End Role="Clientes" Type="TiendaModel.Store.Clientes" Multiplicity="1" />
+    <End Role="Pedidos" Type="TiendaModel.Store.Pedidos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Pedidos">
+        <PropertyRef Name="Cliente_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PedidoArticulo_Articulos">
+    <End Role="Articulos" Type="TiendaModel.Store.Articulos" Multiplicity="1" />
+    <End Role="PedidoArticulo" Type="TiendaModel.Store.PedidoArticulo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Articulos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PedidoArticulo">
+        <PropertyRef Name="Articulos_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PedidoArticulo_Pedidos">
+    <End Role="PedidoArticulo" Type="TiendaModel.Store.PedidoArticulo" Multiplicity="*" />
+    <End Role="Pedidos" Type="TiendaModel.Store.Pedidos" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Pedidos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PedidoArticulo">
+        <PropertyRef Name="Pedidos_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TiendaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Articulo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="stock" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Pedidos" Relationship="Self.PedidoArticulo" FromRole="Articulos" ToRole="Pedidos" />
+          <Property Name="precio" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="apellidos" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="user" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Pedidos" Relationship="Self.FK_ClientePedido" FromRole="Clientes" ToRole="Pedidos" />
+        </EntityType>
+        <EntityType Name="Pedido">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <Property Name="fecha_registro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Cliente_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_ClientePedido" FromRole="Pedidos" ToRole="Clientes" />
+          <NavigationProperty Name="Articulos" Relationship="Self.PedidoArticulo" FromRole="Pedidos" ToRole="Articulos" />
+        </EntityType>
+        <Association Name="FK_ClientePedido">
+          <End Role="Clientes" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Pedidos" Type="Self.Pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="Cliente_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PedidoArticulo">
+          <End Role="Articulos" Type="Self.Articulo" Multiplicity="*" />
+          <End Role="Pedidos" Type="Self.Pedido" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="TiendaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Articulos" EntityType="Self.Articulo" />
+          <EntitySet Name="Clientes" EntityType="Self.Cliente" />
+          <EntitySet Name="Pedidos" EntityType="Self.Pedido" />
+          <AssociationSet Name="FK_ClientePedido" Association="Self.FK_ClientePedido">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="PedidoArticulo" Association="Self.PedidoArticulo">
+            <End Role="Articulos" EntitySet="Articulos" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TiendaModelStoreContainer" CdmEntityContainer="TiendaEntities">
+    <EntitySetMapping Name="Articulos">
+      <EntityTypeMapping TypeName="IsTypeOf(TiendaModel.Articulo)">
+        <MappingFragment StoreEntitySet="Articulos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="stock" ColumnName="stock" />
+          <ScalarProperty Name="precio" ColumnName="precio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clientes">
+      <EntityTypeMapping TypeName="IsTypeOf(TiendaModel.Cliente)">
+        <MappingFragment StoreEntitySet="Clientes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="user" ColumnName="user" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pedidos">
+      <EntityTypeMapping TypeName="IsTypeOf(TiendaModel.Pedido)">
+        <MappingFragment StoreEntitySet="Pedidos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+          <ScalarProperty Name="Cliente_Id" ColumnName="Cliente_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="PedidoArticulo" TypeName="TiendaModel.PedidoArticulo" StoreEntitySet="PedidoArticulo">
+      <EndProperty Name="Articulos">
+        <ScalarProperty Name="Id" ColumnName="Articulos_Id" />
+      </EndProperty>
+      <EndProperty Name="Pedidos">
+        <ScalarProperty Name="Id" ColumnName="Pedidos_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
