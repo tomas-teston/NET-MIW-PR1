@@ -1,10 +1,12 @@
-﻿using ProyectoTienda;
+﻿using Microsoft.AspNet.Identity;
+using ProyectoTienda;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace ProyectoTienda.Controllers
 {
@@ -34,6 +36,43 @@ namespace ProyectoTienda.Controllers
                 }
             }
             return RedirectToAction("Index");
+        }
+
+        // GET: 
+        public ActionResult CreateOrder(CarritoCompra cc)
+        {
+
+            string email = User.Identity.GetUserName();
+
+            var queryAllClients = from cliente in db.Clientes
+                                  where cliente.email.Equals(email)
+                                  select cliente;
+
+
+            if (queryAllClients.Count() == 0) 
+            {
+                // LLevarle a registrar cliente.
+                return View(cc);
+            } else
+            {
+                foreach (var cliente in queryAllClients)
+                {
+                    Console.WriteLine(cliente);
+                }
+
+                //Crear pedido...
+                Pedido pedido = new Pedido();
+
+                foreach (Articulo art in cc)
+                {
+                    pedido.Articulos.Add(art);
+                }
+
+                pedido.fecha_registro = DateTime.Now;
+
+                //Liberar el carrito...
+                return View(cc);
+            }
         }
     }
 }

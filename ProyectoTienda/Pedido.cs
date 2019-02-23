@@ -21,7 +21,6 @@ namespace ProyectoTienda
         }
     
         public int Id { get; set; }
-        public int cantidad { get; set; }
         public System.DateTime fecha_registro { get; set; }
         public int Cliente_Id { get; set; }
     

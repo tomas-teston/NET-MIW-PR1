@@ -24,8 +24,7 @@ namespace ProyectoTienda
         public string nombre { get; set; }
         public string apellidos { get; set; }
         public string direccion { get; set; }
-        public string user { get; set; }
-        public string password { get; set; }
+        public string email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pedido> Pedidos { get; set; }

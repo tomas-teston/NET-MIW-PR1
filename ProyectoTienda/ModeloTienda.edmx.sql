@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/23/2019 12:11:45
+-- Date Created: 02/24/2019 00:17:08
 -- Generated from EDMX file: C:\Users\Tomas\Desktop\Organizador\NET\ProyectoTienda\ProyectoTienda\ProyectoTienda\ModeloTienda.edmx
 -- --------------------------------------------------
 
@@ -20,11 +20,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ClientePedido]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Pedidos] DROP CONSTRAINT [FK_ClientePedido];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PedidoArticulo_Articulo]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PedidoArticulo] DROP CONSTRAINT [FK_PedidoArticulo_Articulo];
+IF OBJECT_ID(N'[dbo].[FK_PedidoArticulo_Articulos]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PedidoArticulo] DROP CONSTRAINT [FK_PedidoArticulo_Articulos];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PedidoArticulo_Pedido]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PedidoArticulo] DROP CONSTRAINT [FK_PedidoArticulo_Pedido];
+IF OBJECT_ID(N'[dbo].[FK_PedidoArticulo_Pedidos]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PedidoArticulo] DROP CONSTRAINT [FK_PedidoArticulo_Pedidos];
 GO
 
 -- --------------------------------------------------
@@ -37,11 +37,11 @@ GO
 IF OBJECT_ID(N'[dbo].[Clientes]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Clientes];
 GO
-IF OBJECT_ID(N'[dbo].[PedidoArticulo]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PedidoArticulo];
-GO
 IF OBJECT_ID(N'[dbo].[Pedidos]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Pedidos];
+GO
+IF OBJECT_ID(N'[dbo].[PedidoArticulo]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PedidoArticulo];
 GO
 
 -- --------------------------------------------------
@@ -63,15 +63,13 @@ CREATE TABLE [dbo].[Clientes] (
     [nombre] varchar(50)  NULL,
     [apellidos] varchar(150)  NULL,
     [direccion] varchar(350)  NULL,
-    [user] varchar(50)  NULL,
-    [password] varchar(100)  NULL
+    [email] varchar(50)  NULL
 );
 GO
 
 -- Creating table 'Pedidos'
 CREATE TABLE [dbo].[Pedidos] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [cantidad] int  NOT NULL,
     [fecha_registro] datetime  NOT NULL,
     [Cliente_Id] int  NOT NULL
 );
