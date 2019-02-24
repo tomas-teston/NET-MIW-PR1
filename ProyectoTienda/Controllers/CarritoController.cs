@@ -2,6 +2,7 @@
 using ProyectoTienda;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -41,7 +42,6 @@ namespace ProyectoTienda.Controllers
         // GET: 
         public ActionResult CreateOrder(CarritoCompra cc)
         {
-
             string email = User.Identity.GetUserName();
 
             var queryAllClients = from cliente in db.Clientes
@@ -51,27 +51,43 @@ namespace ProyectoTienda.Controllers
 
             if (queryAllClients.Count() == 0) 
             {
-                // LLevarle a registrar cliente.
-                return View(cc);
+                // LLevarle a registrar cliente si no tenemos sus datos.
+                Cliente cliente = new Cliente();
+                cliente.email = email;
+                return RedirectToAction("Create", "Cliente", cliente);
             } else
             {
+                Cliente clientePedido = new Cliente();
                 foreach (var cliente in queryAllClients)
                 {
-                    Console.WriteLine(cliente);
+                    clientePedido = cliente;
                 }
 
-                //Crear pedido...
+                //Crear pedido (actualizando el stock de cada artículo).
                 Pedido pedido = new Pedido();
 
                 foreach (Articulo art in cc)
                 {
-                    pedido.Articulos.Add(art);
+                    pedido.Articulos.Add(db.Articulos.Find(art.Id));
+                    
+                    Articulo articuloDDBB = db.Articulos.Find(art.Id);
+                    articuloDDBB.stock--;
+                    db.Entry(articuloDDBB).State = EntityState.Modified;
+
                 }
 
                 pedido.fecha_registro = DateTime.Now;
+                pedido.Cliente = clientePedido;
+                pedido.Cliente_Id = clientePedido.Id;
 
-                //Liberar el carrito...
-                return View(cc);
+                db.Pedidos.Add(pedido);
+
+                db.SaveChanges();
+
+                //Liberar el carrito
+                cc.Clear();
+
+                return RedirectToAction("Index");
             }
         }
     }
