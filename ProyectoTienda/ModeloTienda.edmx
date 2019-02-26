@@ -4,97 +4,98 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TiendaModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="TiendaModelStoreContainer">
-    <EntitySet Name="Articulos" EntityType="TiendaModel.Store.Articulos" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Clientes" EntityType="TiendaModel.Store.Clientes" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Pedidos" EntityType="TiendaModel.Store.Pedidos" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="PedidoArticulo" EntityType="TiendaModel.Store.PedidoArticulo" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="FK_ClientePedido" Association="TiendaModel.Store.FK_ClientePedido">
-      <End Role="Clientes" EntitySet="Clientes" />
-      <End Role="Pedidos" EntitySet="Pedidos" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PedidoArticulo_Articulos" Association="TiendaModel.Store.FK_PedidoArticulo_Articulos">
-      <End Role="Articulos" EntitySet="Articulos" />
-      <End Role="PedidoArticulo" EntitySet="PedidoArticulo" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PedidoArticulo_Pedidos" Association="TiendaModel.Store.FK_PedidoArticulo_Pedidos">
-      <End Role="Pedidos" EntitySet="Pedidos" />
-      <End Role="PedidoArticulo" EntitySet="PedidoArticulo" />
-    </AssociationSet>
-  </EntityContainer>
-  <EntityType Name="Articulos">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="nombre" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="stock" Type="int" Nullable="false" />
-    <Property Name="precio" Type="float" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Clientes">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="nombre" Type="varchar" Nullable="true" MaxLength="50" />
-    <Property Name="apellidos" Type="varchar" Nullable="true" MaxLength="150" />
-    <Property Name="direccion" Type="varchar" Nullable="true" MaxLength="350" />
-    <Property Name="email" Type="varchar" Nullable="true" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="Pedidos">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="fecha_registro" Type="datetime" Nullable="false" />
-    <Property Name="Cliente_Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="PedidoArticulo">
-    <Key>
-      <PropertyRef Name="Articulos_Id" />
-      <PropertyRef Name="Pedidos_Id" />
-    </Key>
-    <Property Name="Articulos_Id" Type="int" Nullable="false" />
-    <Property Name="Pedidos_Id" Type="int" Nullable="false" />
-  </EntityType>
-  <Association Name="FK_ClientePedido">
-    <End Role="Clientes" Type="TiendaModel.Store.Clientes" Multiplicity="1" />
-    <End Role="Pedidos" Type="TiendaModel.Store.Pedidos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Clientes">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Pedidos">
-        <PropertyRef Name="Cliente_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PedidoArticulo_Articulos">
-    <End Role="Articulos" Type="TiendaModel.Store.Articulos" Multiplicity="1" />
-    <End Role="PedidoArticulo" Type="TiendaModel.Store.PedidoArticulo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Articulos">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PedidoArticulo">
-        <PropertyRef Name="Articulos_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PedidoArticulo_Pedidos">
-    <End Role="PedidoArticulo" Type="TiendaModel.Store.PedidoArticulo" Multiplicity="*" />
-    <End Role="Pedidos" Type="TiendaModel.Store.Pedidos" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Pedidos">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PedidoArticulo">
-        <PropertyRef Name="Pedidos_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-</Schema></edmx:StorageModels>
+    <Schema Namespace="TiendaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Articulos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="stock" Type="int" Nullable="false" />
+          <Property Name="precio" Type="float" Nullable="false" />
+          <Property Name="img" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="apellidos" Type="varchar" MaxLength="150" />
+          <Property Name="direccion" Type="varchar" MaxLength="350" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PedidoArticulo">
+          <Key>
+            <PropertyRef Name="Articulos_Id" />
+            <PropertyRef Name="Pedidos_Id" />
+          </Key>
+          <Property Name="Articulos_Id" Type="int" Nullable="false" />
+          <Property Name="Pedidos_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pedidos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha_registro" Type="datetime" Nullable="false" />
+          <Property Name="Cliente_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ClientePedido">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="Cliente_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PedidoArticulo_Articulos">
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="1" />
+          <End Role="PedidoArticulo" Type="Self.PedidoArticulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PedidoArticulo">
+              <PropertyRef Name="Articulos_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PedidoArticulo_Pedidos">
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="1" />
+          <End Role="PedidoArticulo" Type="Self.PedidoArticulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedidos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PedidoArticulo">
+              <PropertyRef Name="Pedidos_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TiendaModelStoreContainer">
+          <EntitySet Name="Articulos" EntityType="Self.Articulos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PedidoArticulo" EntityType="Self.PedidoArticulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pedidos" EntityType="Self.Pedidos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ClientePedido" Association="Self.FK_ClientePedido">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PedidoArticulo_Articulos" Association="Self.FK_PedidoArticulo_Articulos">
+            <End Role="Articulos" EntitySet="Articulos" />
+            <End Role="PedidoArticulo" EntitySet="PedidoArticulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PedidoArticulo_Pedidos" Association="Self.FK_PedidoArticulo_Pedidos">
+            <End Role="Pedidos" EntitySet="Pedidos" />
+            <End Role="PedidoArticulo" EntitySet="PedidoArticulo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TiendaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -107,6 +108,7 @@
           <Property Name="stock" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Pedidos" Relationship="Self.PedidoArticulo" FromRole="Articulos" ToRole="Pedidos" />
           <Property Name="precio" Type="Double" Nullable="false" />
+          <Property Name="img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Cliente">
           <Key>
@@ -167,7 +169,8 @@
     <EntitySetMapping Name="Articulos">
       <EntityTypeMapping TypeName="IsTypeOf(TiendaModel.Articulo)">
         <MappingFragment StoreEntitySet="Articulos">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="stock" ColumnName="stock" />
           <ScalarProperty Name="precio" ColumnName="precio" />

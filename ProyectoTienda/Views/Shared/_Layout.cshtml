@@ -8,43 +8,50 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/alertify.core.css")
     @Styles.Render("~/Content/alertify.default.css")
+    @Styles.Render("~/Content/simple-sidebar.css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/card-menu.css")
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <script src="~/Scripts/alertify/alertify.js"></script>
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Nombre de aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Ver productos", "Index", "Articulo")</li>
-                    <li>@Html.ActionLink("Ver carrito", "Index", "Carrito")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+    <div class="menu">
+        <button class="burger burger3"><span></span></button>
+        <div id="menu-logo">
+            <!--<i class="fa fa-graduation-cap"></i>-->
+            <img class="img-logo" src="~/Content/img/upmlogo.jpg" alt="imagen-raquetas-clases">
+            <h1>U.P.M Cosmetics</h1>
+            @Html.Partial("_LoginPartial")
         </div>
     </div>
+    <div id="wrapper">
+        <div id="sidebar-wrapper" class="slidebar">
+            <ul class="sidebar-nav">
+                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")">@Html.ActionLink("Inicio", "Index", "Home")</li>
+                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "About" && ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")">@Html.ActionLink("Acerca de", "About", "Home")</li>
+                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Contact" && ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")">@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Articulo" ? "active" : "")">@Html.ActionLink("Ver productos", "Index", "Articulo")</li>
+                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Carrito" ? "active" : "")">@Html.ActionLink("Ver carrito", "Index", "Carrito")</li>
+            </ul>
+        </div>
+    </div>
+
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+        <footer class="footer">
+            <div class="container">
+                <div class="row text-center">
+                    <hr>
+                    <p class="text-muted">Universidad Politécnica de Madrid. &copy; @DateTime.Now.Year</p>
+                </div>
+            </div>
         </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/main.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

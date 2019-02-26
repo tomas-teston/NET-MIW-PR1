@@ -19,6 +19,7 @@
 	border: 1px solid #CCC;
 	padding: 10px;
 	border-radius: 4px;
+    font-size: 1.2rem;
 }
 .alertify-button {
 	border-radius: 4px;
@@ -76,6 +77,6 @@
 		background: rgba(255,26,0,.9);
 	}
 	.alertify-log-success {
-		background: #5CB811;
+		background: #56b544 !important;
 		background: rgba(92,184,17,.9);
 	}

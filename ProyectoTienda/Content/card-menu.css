@@ -1,0 +1,177 @@
+.cyb-card-menu-title {
+    font-size: 30px;
+    color: #003245;
+}
+
+.cyb-card-menu-subtitle {
+    font-size: 12px;
+    color: #00b2c3;
+    margin-top: 0;
+}
+
+.cyb-horizontal-title {
+    font-size: 20px;
+}
+
+.cyb-card-menu-container {
+    list-style: none;
+    display: flex;
+    flex-flow: row wrap;
+    padding: 0 0 1% 8px;
+    /* justify-content: center;
+	 */
+}
+
+.cyb-card-menu-container .cyb-card-menu {
+    width: 200px;
+    min-width: 200px;
+    margin: 20px 20px 0 0;
+    padding: 10px 10px 5px 10px;
+    list-style-type: none;
+    background-color: #fff;
+    border-radius: 3px;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 9px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.cyb-card-menu-container .cyb-card-menu img {
+    width: 100px;
+    display: block;
+    margin: auto;
+}
+
+.cyb-card-menu-container .cyb-card-info {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.cyb-card-menu-container .cyb-card-info .cyb-card-title h1 {
+    text-align: center;
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: 800;
+    font-size: 1.3rem;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cyb-card-menu-container .cyb-card-info .cyb-card-subtitle h2 {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: 400;
+    font-size: 1.2rem;
+    color: #000;
+}
+
+.cyb-card-menu-container .cyb-disabled-link {
+    transform: scale(1);
+    cursor: default;
+}
+
+.cyb-card-menu-container .active {
+    transform: scale(1.05);
+    border-bottom: 4px solid #00b6c7;
+}
+
+.cyb-card-menu-container.cyb-horizontal {
+    flex-flow: wrap;
+    flex-wrap: wrap;
+    overflow-x: unset;
+}
+
+.cyb-card-menu-container.cyb-horizontal .cyb-card-menu {
+    flex-basis: 30%;
+    padding: 15px 10px 10px 10px;
+    margin: 20px 0 0 23px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.cyb-card-menu-container.cyb-horizontal .cyb-card-menu:hover:not(.cyb-disabled-link) {
+    transform: scale(1.05);
+    transition: transform 0.2s;
+}
+
+.cyb-card-menu-container.cyb-horizontal .cyb-disabled-link {
+    transform: scale(1);
+    cursor: default;
+}
+
+.cyb-card-menu-container.cyb-horizontal .cyb-card-img, .cyb-card-menu-container.cyb-horizontal .cyb-card-info {
+    vertical-align: top;
+    display: inline-block;
+}
+
+.cyb-card-menu-container.cyb-horizontal .cyb-card-info {
+    width: calc(100% - 115px);
+    margin-left: 15px;
+    margin-top: 0;
+}
+
+.cyb-card-menu-container.cyb-horizontal .cyb-card-info h1, .cyb-card-menu-container.cyb-horizontal .cyb-card-info h2 {
+    text-align: left;
+}
+
+.cyb-card-menu-container.cyb-horizontal .cyb-card-info h2 {
+    margin-top: 5px;
+}
+
+.cyb-card-menu-container.cyb-horizontal .cyb-card-info a {
+    color: #00b6c7;
+}
+
+.cyb-card-menu-container.cyb-horizontal .cyb-card-info .cyb-card-subtitle h2 {
+    font-size: 0.8rem;
+    text-align: justify !important;
+}
+
+.cyb-card-menu-container.cyb-horizontal .cyb-internal-link {
+    margin-top: 8px;
+}
+
+.cyb-card-menu-container.cyb-horizontal li > i {
+    color: #003245;
+}
+
+@media (max-width: 992px) {
+    .cyb-card-menu-container.cyb-horizontal .cyb-card-menu {
+        flex-basis: 45%;
+    }
+}
+
+@media (max-width: 768px) {
+    .cyb-card-menu-container.cyb-horizontal .cyb-card-menu {
+        flex-basis: 100%;
+        margin-right: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .cyb-card-menu-container.cyb-horizontal .cyb-card-menu {
+        flex-basis: 100%;
+        margin-right: 20px;
+    }
+}
+
+.cyb-card-button {
+    padding: 5px 5px 5px 5px;
+    border: 1px solid #d6d8d9;
+}
+
+.cyb-card-button:hover {
+    background-color: #007abd; 
+    transition: all linear 100ms;
+}
+
+.cyb-card-button:hover a {
+    text-decoration: none;
+    background-color: transparent;
+    color: #fff;
+    transition: all linear 100ms;
+}
+
+a {
+    color: #000;
+}

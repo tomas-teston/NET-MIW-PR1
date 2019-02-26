@@ -4,44 +4,40 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Productos</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.stock)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.precio)
-        </th>
-        <th></th>
-    </tr>
-
+<ul class="cyb-card-menu-container">
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.stock)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.precio)
-            </td>
-            <td>
-                @Html.ActionLink("Añadir al carrito", "Add", new { id = item.Id })
-            </td>
-        </tr>
+        <li class="cyb-card-menu">
+            <div class="cyb-card-img">
+                <img src="../@Url.Content(item.img)" alt="Image" />
+            </div>
+            <div class="cyb-card-info">
+                <div class="cyb-card-title">
+                    <h1>
+                        @Html.DisplayFor(modelItem => item.nombre)
+                    </h1>
+                </div>
+                <div class="cyb-card-subtitle">
+                    <h2>
+                        @Html.DisplayFor(modelItem => item.precio)€ -
+                                        Stock (@Html.DisplayFor(modelItem => item.stock))
+                    </h2>
+                </div>
+                <div class="cyb-card-button">
+                    @if (item.stock > 0)
+                    {
+                        @Html.ActionLink("Añadir al carrito", "Add", new { id = item.Id })
+                    } else
+                    {
+                        <p>No hay stock</p>
+                    }
+                </div>
+            </div>
+        </li>
     }
-
-</table>
+</ul>
 
 @if (TempData["notice_success"] != null)
 {
