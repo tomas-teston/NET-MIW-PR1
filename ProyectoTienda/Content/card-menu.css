@@ -159,19 +159,3 @@
     padding: 5px 5px 5px 5px;
     border: 1px solid #d6d8d9;
 }
-
-.cyb-card-button:hover {
-    background-color: #007abd; 
-    transition: all linear 100ms;
-}
-
-.cyb-card-button:hover a {
-    text-decoration: none;
-    background-color: transparent;
-    color: #fff;
-    transition: all linear 100ms;
-}
-
-a {
-    color: #000;
-}

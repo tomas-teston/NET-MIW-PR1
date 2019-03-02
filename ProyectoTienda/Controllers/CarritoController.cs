@@ -87,8 +87,13 @@ namespace ProyectoTienda.Controllers
                 //Liberar el carrito
                 cc.Clear();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("OrderCreated");
             }
+        }
+
+        public ActionResult OrderCreated()
+        {
+            return View();
         }
     }
 }
