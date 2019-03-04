@@ -32,10 +32,20 @@
                 <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "About" && ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")">@Html.ActionLink("Acerca de", "About", "Home")</li>
                 <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Contact" && ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")">@Html.ActionLink("Contacto", "Contact", "Home")</li>
                 <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Articulo" ? "active" : "")">@Html.ActionLink("Ver productos", "Index", "Articulo")</li>
-                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Carrito" ? "active" : "")">@Html.ActionLink("Ver carrito", "Index", "Carrito")</li>
+                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Carrito" ? "active" : "")">
+                    @Html.ActionLink("Ver carrito", "Index", "Carrito")
+                    @{ List<ProyectoTienda.Articulo> carrito = (List<ProyectoTienda.Articulo>)HttpContext.Current.Session["KEY"];}
+                    @if (carrito != null)
+                    {
+                        <p>(@carrito.Count())</p>
+                    }
+                </li>
             </ul>
         </div>
     </div>
+
+   
+
 
     <div class="container body-content">
         @RenderBody()
