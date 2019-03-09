@@ -1,7 +1,5 @@
 # NET-MiW-PR1
 ASP.NET
-
-# -NET - Práctica 1
 > En este proyecto se realiza una tienda virtual de Productos. 
 > #### [Máster en Ingeniería Web por la Universidad Politécnica de Madrid (miw-upm)](http://miw.etsisi.upm.es)
 > #### Asignatura: *.NET*
